@@ -54,10 +54,10 @@ This project involves building a comprehensive sales data pipeline for a retail 
 ![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/f4a0142c-ab02-42ae-8261-50b395193c51)
 ![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/067853db-c82c-436d-9b3a-4127e7ff285d)
 
+## Dockerization
 
-## Notes
-- Ensure the PostgreSQL credentials in the script match your database setup.
-- Replace the OpenWeatherMap API key in the script with your own.
+This project has been dockerized into one container and can be pulled by using 
+``` docker pull tomlo1/salesdatapipelinepgsql:1.0 . ```
 
 ## Author
 tomlo1
