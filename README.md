@@ -1,97 +1,63 @@
-
-
 # Sales Data Analysis Pipeline
+
 ## Project Overview
-This project implements a comprehensive sales data pipeline for a retail company. The pipeline combines generated sales data with user data fetched from an external API (JSONPlaceholder) and weather data from OpenWeatherMap API. The objective is to perform data transformations, aggregations, and visualizations to derive insights into customer behavior and sales performance.
+This project involves building a comprehensive sales data pipeline for a retail company. The pipeline combines generated sales data with external user data and weather data, performs data transformations and aggregations, and stores the final dataset in a PostgreSQL database. The aim is to enable analysis and derive insights into customer behavior and sales performance.
 
 ## Data Sources
-#### Sales Data: Provided in a CSV file (sales_data.csv). Contains fields like order_id, customer_id, product_id, quantity, price, and order_date.
-#### User Data: Fetched from JSONPlaceholder API. Includes user details like id, name, username, email, and geolocation (lat, lng).
-#### Weather Data: Fetched from OpenWeatherMap API using the geolocation data from the user data.
+- **Sales Data**: Provided in a CSV file `sales_data.csv`. Contains fields like `order_id`, `customer_id`, `product_id`, `quantity`, `price`, and `order_date`.
+- **User Data**: Fetched from JSONPlaceholder API. Includes details like `id`, `name`, `username`, `email`, and geolocation (`lat`, `lng`).
+- **Weather Data**: Fetched from OpenWeatherMap API using the geolocation data from the user data.
 
-## Pipeline Steps
-#### Data Loading: Sales data is loaded from a CSV file.
+## Pipeline Components
+1. **Data Loading**: Sales data is loaded from the CSV file.
+![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/965a9f66-15e1-4181-b22d-cb41ad17f2e3)
 
-![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/64ea2e6b-1e1f-4385-a0ac-2229e8bd9b80)
+2. **Data Fetching**:
+   - User data is fetched from the JSONPlaceholder API.
+![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/70474a0c-cda8-41b1-bfa6-36a5826b6aab)
 
+   - Weather data is fetched from the OpenWeatherMap API using user geolocation.
+![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/fd813464-0162-43cf-bf1b-9f97bc011fba)
 
-### Data Fetching:
-#### Fetch user data from JSONPlaceholder API.
+3. **Data Merging**: Sales data is merged with user and weather data.
+![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/7dd1638c-6108-42a2-8fe7-d88a221a252f)
 
-![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/2b3c94e2-ba98-4d1d-b899-547004246817)
+4. **Data Aggregations**: Calculations like total sales per customer, average order quantity per product, and top-selling products.
+![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/5776ff3d-c63c-4a2c-959f-42012057f227)
 
-#### Fetch weather data from OpenWeatherMap API based on user's geolocation.
+5. **Data Storage**: The transformed data is stored in a PostgreSQL database.
+![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/01928d49-8bff-4ffd-b1d9-26a4d344761c)
 
-![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/6c9cf9bb-c83e-4a47-86e9-897aa0749168)
+![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/83029584-0b1b-4e3a-9ed7-b7ff3dd9867f)
 
-#### Data Merging: Sales data is merged with user data and weather data.
-
-
-![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/70ffbfce-300d-40c6-802a-27e051de1ce1)
-
-
-#### Data Aggregation and Analysis: Perform various aggregations like total sales per customer, average order quantity per product, and top-selling products.
-
-![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/f8fce8f8-d18e-496f-aa00-b4cb8365de9d)
-
-#### Data Storage: Store the merged and transformed data into MongoDB.
-
-![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/4e467a00-0f37-4df4-afc2-ff4cf0ae3a46)
-
-#### Visualization: Generate visualizations for sales distribution, product popularity, sales trends, and other insights.
+6. **Visualization**: Generation of various plots to visualize the data insights.
 
 ## Installation and Setup
-#### Prerequisites
-Anaconda: This project requires Anaconda, a popular distribution of Python, which includes Jupyter Notebook.
+### Prerequisites
+- Anaconda (includes Python and Jupyter Notebook)
+- PostgreSQL Database
 
-MongoDB: A running MongoDB instance is needed for data storage.
-
-#### Setting Up the Environment
-### Install Anaconda:
-Download and install Anaconda from the official site. Choose the installer appropriate for your operating system.
-Follow the installation instructions provided on the website.
-
-### Install MongoDB:
-Follow the instructions on the MongoDB official documentation to install MongoDB on your machine.
-
-### Setting up a Conda Environment:
-Open the Anaconda Navigator and create a new environment.
-Select Python as the base language for this environment.
-
-### Install Required Libraries:
-Once the environment is created, open a terminal in this environment (through Anaconda Navigator).
-Install the required Python libraries by running:
-``` pip install pandas requests pymongo matplotlib seaborn ```
-
-### Launch Jupyter Notebook:
-Inside the Anaconda Navigator, launch Jupyter Notebook within the created environment.
-Use Jupyter Notebook to open and run the project files.
-
-### Running MongoDB:
-Start the MongoDB service on your machine. The method to start the service varies based on your operating system.
-
-### Running the Project
-Open the project Jupyter Notebook in the Anaconda environment.
-Run the cells in the notebook sequentially to execute the data pipeline.
-### Dependencies
-Python libraries: pandas, requests, pymongo, matplotlib, seaborn
-MongoDB
-
-## Limitations and Issues
-#### Geolocation Data: The latitude and longitude provided by JSONPlaceholder are often not realistic (e.g., in the middle of the ocean), leading to issues in fetching valid city names.
-#### Weather Data: The OpenWeatherMap API in the free account tier does not provide historical weather data, which limits the ability to correlate sales data with past weather conditions accurately.
-## Potential Enhancements
-#### Use of a more accurate and comprehensive API for user geolocation and historical weather data.
-#### Implementing caching for API responses to optimize performance and handle API rate limits.
+### Steps
+1. **Clone the Repository**: Clone/download the project repository to your local machine.
+2. **Set Up PostgreSQL Database**: Install and set up PostgreSQL. Create a database named `salesdata`.
+3. **Install Python Dependencies**: Run `pip install pandas requests sqlalchemy psycopg2-binary matplotlib seaborn` to install required libraries.
+4. **Launch Jupyter Notebook**: Open Jupyter Notebook in the project directory.
+5. **Run the Notebook**: Execute the cells in the notebook sequentially.
 
 ## Visualizations
-![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/ca2c0426-87d8-4790-83e3-9d4e5725c790)
-![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/cde69603-d872-42c3-853c-6b393bd6ffcd)
-![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/b54dff08-b13c-4877-8215-635db483b44f)
-![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/bae4caa2-f519-44ae-8236-43c01c9fbe7d)
-![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/c9b61e1d-f02c-483e-8089-3748920c4007)
-![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/fddd9fef-7496-4dd9-8465-a0a447db0960)
+![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/addfad83-3b26-4e52-a17c-45dda597557c)
+![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/6e83bbf1-fd3b-4a5a-9aa7-cffcddb7da4f)
+![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/d424b149-8891-4cd2-b30b-7e8bb34f07e9)
+![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/9175899f-ad14-4fde-8ed2-6660b7fcc80f)
+![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/164760b2-735d-4772-b1ad-24e82aa3819a)
+![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/fd4e4403-424b-4e3f-950c-f2ed7c849dc1)
+![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/f4a0142c-ab02-42ae-8261-50b395193c51)
+![image](https://github.com/tomlo1/saledatapipeline/assets/147176370/067853db-c82c-436d-9b3a-4127e7ff285d)
 
 
-# Author
+## Notes
+- Ensure the PostgreSQL credentials in the script match your database setup.
+- Replace the OpenWeatherMap API key in the script with your own.
+
+## Author
 tomlo1
