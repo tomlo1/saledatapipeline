@@ -16,5 +16,6 @@ EXPOSE 8888
 # Define environment variable
 ENV NAME World
 
-# Run Jupyter notebook when the container launches
-CMD ["jupyter", "notebook", "--ip='*'", "--port=8888", "--no-browser", "--allow-root"]
+# Command to start Jupyter Notebook and open a specific notebook
+CMD ["jupyter", "notebook", "--ip='*'", "--port=8888", "--no-browser", "saledatapipeline.ipynb"]
+
